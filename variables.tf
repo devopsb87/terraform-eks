@@ -3,19 +3,19 @@ variable "env" {
 }
 
 variable "ami" {
-  default = "ami-045a533d19c34eeb6"
+  default = "ami-0220d79f3f480ecf5"
 }
 
 variable "instance_type" {
-  default = "t3.small"
+  default = "t3.micro"
 }
 
 variable "vpc_security_group_ids" {
-  default = [ "sg-09663d91a4fca31c9" ]
+  default = [ "sg-0861e09dd92fe1871" ]
 }
 
 variable "zone_id" {
-  default = "Z057881017RC0RRKVUX8E"
+  default = "Z016642425URABBZ7FJPB"
 }
 
 variable "components" {

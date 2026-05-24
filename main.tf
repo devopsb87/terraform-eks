@@ -11,7 +11,7 @@ resource "aws_eks_cluster" "main" {
   role_arn = aws_iam_role.cluster.arn
   version  = "1.34"
   vpc_config {
-    subnet_ids = ["subnet-0ce8afa0dde986bc0", "subnet-0629872d39e431ea9"]
+    subnet_ids = ["subnet-009586ad5c22c3e4c", "subnet-0629872d39e431ea9"]
   }
   access_config {
     authentication_mode = "API_AND_CONFIG_MAP"
@@ -22,7 +22,7 @@ resource "aws_eks_node_group" "main" {
   cluster_name    = aws_eks_cluster.main.name
   node_group_name = "main"
   node_role_arn   = aws_iam_role.node.arn
-  subnet_ids      = ["subnet-0ce8afa0dde986bc0", "subnet-0629872d39e431ea9"]
+  subnet_ids      = ["subnet-009586ad5c22c3e4c", "subnet-06599c41792b823a9"]
   instance_types  = ["t3.xlarge","t3.2xlarge"]
   capacity_type   = "SPOT"
 
@@ -39,14 +39,14 @@ resource "aws_eks_node_group" "main" {
 
 resource "aws_eks_access_entry" "workstation" {
   cluster_name      = aws_eks_cluster.main.name
-  principal_arn     = "arn:aws:iam::739561048503:role/workstation-role"
+  principal_arn     = "arn:aws:iam::624234316771:role/workstation-role"
   type              = "STANDARD"
 }
 
 resource "aws_eks_access_policy_association" "workstation" {
   cluster_name  = aws_eks_cluster.main.name
   policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-  principal_arn = "arn:aws:iam::739561048503:role/workstation-role"
+  principal_arn = "arn:aws:iam::624234316771:role/workstation-role"
 
   access_scope {
     type       = "cluster"
@@ -113,7 +113,7 @@ resource "null_resource" "ansible" {
       "sudo dnf install ansible -y",
       #"sudo dnf install python3.13-pip -y",
       #"sudo pip3.11 install ansible",
-      "ansible-pull -i localhost, -U https://github.com/raghudevopsb87/roboshop-ansible-templates.git main.yml -e component=${each.key} -e env=dev"
+      "ansible-pull -i localhost, -U https://github.com/devopsb87/roboshop-ansible-templates.git main.yml -e component=${each.key} -e env=dev"
     ]
 
   }
